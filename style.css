@@ -1,9 +1,68 @@
-#main-container {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-display: flex;
-flex-direction: row;
+/* Stopwatch container styling */
+.stopwatch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+/* Stopwatch styling */
+.stopwatch {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+}
 
+.display {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #333;
+}
 
+.controls {
+    margin-bottom: 20px;
+}
 
+.btn {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.laps {
+    text-align: left;
+}
+
+.lap-item {
+    border-top: 1px solid #eee;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.lap-item:first-child {
+    border-top: none;
 }

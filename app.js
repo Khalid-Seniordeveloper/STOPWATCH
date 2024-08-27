@@ -1,39 +1,57 @@
-let  hours = document.querySelector('#hours');
-let  minutes = document.querySelector ('#minutes');
-let  seconds = document.querySelector('#seconds');
+let startTime, updatedTime, difference, tInterval, running = false;
+let hours = 0, minutes = 0, seconds = 0;
+const display = document.getElementById('display');
+const laps = document.getElementById('laps');
 
-variable = 0;
+document.getElementById('start').addEventListener('click', startTimer);
+document.getElementById('stop').addEventListener('click', stopTimer);
+document.getElementById('reset').addEventListener('click', resetTimer);
+document.getElementById('lap').addEventListener('click', recordLap);
 
-
-function timeStart(){
-
-
-    let clear = setInterval(sec, 1000);
+function startTimer() {
+    if (!running) {
+        startTime = new Date().getTime();
+        tInterval = setInterval(updateTimer, 1);
+        running = true;
+    }
 }
 
+function stopTimer() {
+    clearInterval(tInterval);
+    running = false;
+}
 
+function resetTimer() {
+    clearInterval(tInterval);
+    running = false;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    display.innerHTML = '00:00:00';
+    laps.innerHTML = '';
+}
 
-// clearInterval(clear)
-function sec(){
-  
+function updateTimer() {
+    updatedTime = new Date().getTime();
+    difference = updatedTime - startTime;
     
-    variable += 1;
-    console.log(variable);
+    hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    minutes = Math.floor((difference / (1000 * 60)) % 60);
+    seconds = Math.floor((difference / 1000) % 60);
 
-     seconds.innerHTML = `
-    
-    <h1>${variable}</h1>
-    
-    `
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-    if(variable === 6){
+    display.innerHTML = hours + ':' + minutes + ':' + seconds;
+}
 
-
-     variable = 0
-     minutes.innerHTML = `<h1>1 :</h1>`
-    } 
-
-
-
-
+function recordLap() {
+    if (running) {
+        const lapTime = display.innerHTML;
+        const lapItem = document.createElement('div');
+        lapItem.classList.add('lap-item');
+        lapItem.innerHTML = 'Lap: ' + lapTime;
+        laps.appendChild(lapItem);
+    }
 }
